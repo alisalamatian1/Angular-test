@@ -19,14 +19,13 @@ export class PostComponent implements OnInit{
             console.log(response);
             this.posts = response;
             console.log(typeof this.posts)
-        }, error => {
-            alert('An unexpected error occured')
-            console.log(error);
-        });
+        })
     }
     createPost(input: HTMLInputElement) {
         let post : any = {title: input.value}
         input.value = '';
+        this.posts.splice(0, 0, post);
+
         this.service.createPost(post)
             .subscribe((response : any) => {
                 post.id = response.id;
@@ -34,14 +33,16 @@ export class PostComponent implements OnInit{
                 // first is the index we want to add
                 // second param is the number of elements we are deleting
                 // third is the object we are adding
-                this.posts.splice(0, 0, post);
+                
             }, error => {
-                if (error.status === 400) {
+                this.posts.splice(0, 1);
+
+                if (error instanceof NotFoundException) {
                     // this.form.setErrors(error.json());
                 }
                 else {
-                    alert("wola")
-                    console.log("shoot" + error)
+                    // handled by the global error handler we wrote
+                    throw error;
                 }
             }
             )
@@ -56,23 +57,23 @@ export class PostComponent implements OnInit{
                 if (response.status === 200) {
                     console.log(response)
                 }               
-            }, error => {
-                alert("wola")
-                console.log("shoot" + error)
             })
         }
 
         deletePost(post: any) {
+            let index = this.posts.indexOf(post)
+            this.posts.splice(index, 1)
             this.service.deletePost(post)
                 .subscribe((response) => {
-                    let index = this.posts.indexOf(post)
-                    this.posts.splice(index, 1)
                     console.log(response)
                 }, (error: AppException) => {
+                    this.posts.splice(index, 0, post)
+
                     if (error instanceof NotFoundException) {
                         alert("this post has already been deleted")
                     } else {
-                        alert("hola, deleting failed")
+                        // handled by the global error handler
+                        throw error;
                     }
                     console.log("shoot" + error)
                 })
