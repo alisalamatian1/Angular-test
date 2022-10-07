@@ -1,5 +1,6 @@
+import { NotFoundException } from './common/notFound.exception';
+import { AppException } from './common/app.exception';
 import { PostService } from './services/post.service';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from "@angular/core";
 
 
@@ -67,8 +68,8 @@ export class PostComponent implements OnInit{
                     let index = this.posts.indexOf(post)
                     this.posts.splice(index, 1)
                     console.log(response)
-                }, (error: Response) => {
-                    if (error.status === 404) {
+                }, (error: AppException) => {
+                    if (error instanceof NotFoundException) {
                         alert("this post has already been deleted")
                     } else {
                         alert("hola, deleting failed")
