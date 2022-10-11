@@ -1,0 +1,19 @@
+<h1>we are in followrs</h1>
+
+<div *ngFor="let follower of followers" class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="avatar media-object" src="{{ follower.avatar_url }}" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <!-- Here we are routing the follower to its own page
+      Note that the first argument (/followers) is the path
+      and the second paramater is the argument that comes after the path -->
+      <a [routerLink] = "['/followers', follower.id]">{{ follower.login }}</a>
+    </h4>
+    <a href="follower.html_url">{{ follower.html_url }}</a>
+  </div>
+  
+</div>
