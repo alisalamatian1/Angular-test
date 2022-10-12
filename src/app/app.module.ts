@@ -1,3 +1,4 @@
+import { ArchiveComponent } from './home/archive.component';
 import { GithubFollowersService } from './services/github-followers.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppErrorHandler } from './common/app.errorhandler';
@@ -54,6 +55,10 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
         {
           path: '',
           component: HomeComponent
+        },
+        {
+          path: 'archive/:year/:month',
+          component: ArchiveComponent
         },
         {
           path: 'followers/:id/:username',

@@ -8,7 +8,8 @@ export class DataService {
   constructor(private url: string, private http: HttpClient) { }
 
   getAll() {
-    return this.http.get(this.url).pipe(
+    return this.http.get(this.url)
+    .pipe(
       catchError(error => {
         if (error.status === 404) {
           return throwError(new NotFoundException);

@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<div>
+  <p>
+    home works!
+  </p>  
+  <div *ngFor="let archive of archives" class="media">
+    <ul>
+      <li>
+        <a [routerLink] = "['/archive', archive.year, archive.month]">{{archive.year}} / {{archive.month}}</a>        
+      </li>
+    </ul>
+  </div>
+</div>
