@@ -11,7 +11,8 @@
       <!-- Here we are routing the follower to its own page
       Note that the first argument (/followers) is the path
       and the second paramater is the argument that comes after the path -->
-      <a [routerLink] = "['/followers', follower.id]">{{ follower.login }}</a>
+      <a [routerLink] = "['/followers', follower.id, follower.login]"
+         [queryParams] = "{test : 1}">{{ follower.login }}</a>
     </h4>
     <a href="follower.html_url">{{ follower.html_url }}</a>
   </div>
