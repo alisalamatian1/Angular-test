@@ -1,3 +1,4 @@
+import { ReasonCode } from './reason-code/reason.component';
 import { ArchiveComponent } from './home/archive.component';
 import { GithubFollowersService } from './services/github-followers.service';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -38,7 +39,8 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
     NavbarComponent,
     HomeComponent,
     GithubProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ReasonCode
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,10 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
         {
           path: '',
           component: HomeComponent
+        },
+        {
+          path: 'reason-code',
+          component: ReasonCode
         },
         {
           path: 'archive/:year/:month',

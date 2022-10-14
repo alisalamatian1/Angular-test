@@ -1,0 +1,15 @@
+<h2>reason code</h2>
+
+<table>
+    <tr>
+        <th *ngFor = "let column of headers">
+            {{column}}
+        </th>
+    </tr>
+
+    <tr *ngFor = "let row of rows">
+        <td *ngFor = "let column of headers; let i = index">
+            {{row[column]}}
+        </td>
+    </tr>
+</table>
